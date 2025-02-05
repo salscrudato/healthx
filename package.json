@@ -1,0 +1,38 @@
+{
+  "name": "healthx",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@radix-ui/react-alert-dialog": "^1.1.5",
+    "firebase": "^11.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "client:install": "npm install --prefix client",
+    "client:build": "npm run build --prefix client",
+    "client:start": "npm start --prefix client",
+    "server:install": "npm install --prefix server",
+    "install-all": "npm run client:install && npm run server:install",
+    "deploy": "npm run client:build && firebase deploy --only hosting"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

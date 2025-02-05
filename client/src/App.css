@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 1) Overall Body & Root Setup */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overscroll-behavior: none; /* Prevent iOS bounce */
+}
+
+body {
+  overflow: hidden; /* lock body scroll; we use .app-container for scrolling */
+  background-color: #f9fafb; /* Slightly off-white */
+}
+
+/* 2) The Scrollable Container */
+.app-container {
+  height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff; 
+}
+
+/* 3) Dashboard Container */
+.dashboard-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem; /* top/bottom, left/right */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* 4) Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.dashboard-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827; /* Tailwind Gray-900 */
+  margin: 0;
+}
+
+/* Notification Button */
+.notification-btn {
+  @apply bg-blue-500 text-white px-4 py-2 rounded-lg font-medium shadow-sm;
+  transition: background-color 0.3s ease;
+}
+.notification-btn:hover {
+  background-color: #2563eb; /* a darker shade of blue-600 */
+}
+
+/* 5) Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+/* Card Styles */
+.dashboard-card {
+  @apply bg-white rounded-xl shadow-lg px-6 py-4 text-center text-xl
+    font-medium text-gray-800 transition-all duration-300
+    hover:shadow-2xl hover:bg-gray-100
+    focus:outline-none focus:ring-2 focus:ring-blue-600
+    focus:ring-offset-2;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-card-icon {
+  margin-right: 0.5rem;
+  color: #6b7280; /* Tailwind Gray-500/600 */
+}
+
+/* You can adjust card hover if you want a bit more subtlety */
+.dashboard-card:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-2px);
+}

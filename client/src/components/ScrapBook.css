@@ -1,0 +1,288 @@
+/**********************************************
+  Core Layout & Variables
+**********************************************/
+
+:root {
+  --primary-color: #e82127; /* Accent color */
+  --bg-color: #ffffff;      /* Main background */
+  --card-bg: #fafafa;       /* Lighter card background */
+  --text-color: #000000;    
+  --border-color: #e0e0e0;
+  --transition-speed: 0.3s;
+  --font-family: 'Helvetica Neue', 'Arial', sans-serif;
+
+  /* Spacing tokens - using clamp for fluid spacing */
+  --spacing-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --spacing-s: clamp(0.5rem, 1vw, 1rem);
+  --spacing-m: clamp(0.75rem, 1.5vw, 1.5rem);
+  --spacing-l: clamp(1rem, 2vw, 2rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+/**********************************************
+  Main Container & Title
+**********************************************/
+
+.scrapbook {
+  /* Minimal margin so it feels more app-like on mobile */
+  margin: 0 auto;
+  max-width: 600px;
+  width: min(100%, 600px); /* Use min() to make it responsive */
+  min-width: 320px; /* Prevent it from becoming too narrow */
+  /* A little vertical padding to avoid screen edges */
+  padding: var(--spacing-s) var(--spacing-s) var(--spacing-l);
+}
+
+.scrapbook-title {
+  font-size: 1.75rem; /* Consider making this relative */
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--spacing-m);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+/**********************************************
+  Form Section
+**********************************************/
+
+.scrapbook-form-section {
+  margin-bottom: var(--spacing-l);
+  padding: 0 var(--spacing-s);
+}
+
+.scrapbook-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-m);
+  justify-content: center; /* center on mobile */
+  flex-direction: column; /* Stack form controls vertically on small screens */
+}
+
+/* Reused for file + comment input */
+.form-control {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc(50% - var(--spacing-m));
+  min-width: 150px;
+  width: 100%; /* Make form controls take full width on small screens */
+}
+
+/* File input label */
+.custom-file-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background-color: var(--card-bg);
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  justify-content: center;
+  transition: background-color var(--transition-speed);
+}
+
+.custom-file-label:hover {
+  background-color: #f0f0f0;
+}
+
+.custom-file-label:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.file-input {
+  display: none; /* Hide native input */
+}
+
+.form-control label {
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.form-control input[type="text"] {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  transition: border-color var(--transition-speed);
+}
+
+.form-control input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/**********************************************
+  Button Styles
+**********************************************/
+
+.scrapbook-form button {
+  width: 100%;
+  max-width: 200px; /* wide, easy-to-tap button */
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-speed),
+    transform var(--transition-speed);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+.scrapbook-form button:hover:not(:disabled) {
+  background-color: #c8141d;
+  transform: translateY(-2px);
+}
+
+.scrapbook-form button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/**********************************************
+  Divider
+**********************************************/
+
+.section-divider {
+  border: 0;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: var(--spacing-m) 0;
+}
+
+/**********************************************
+  Entries Section
+**********************************************/
+
+.scrapbook-entries-section {
+  text-align: center;
+  padding: 0 var(--spacing-s);
+}
+
+.section-heading {
+  font-size: 1.25rem; /* Consider making this relative */
+  font-weight: 500;
+  margin-bottom: var(--spacing-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+/**********************************************
+  Grid & Card Layout
+**********************************************/
+
+.scrapbook-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* single column on narrow devices */
+  gap: var(--spacing-m);
+  justify-items: center;
+  padding: var(--spacing-s); /* Add padding to the grid on small screens */
+}
+
+@media (min-width: 480px) {
+  .scrapbook-grid {
+    /* 2 columns on slightly larger screens */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .scrapbook-grid {
+    /* 3 columns on tablets or bigger phones in landscape */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.scrapbook-card {
+  width: 100%;
+  max-width: 350px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  padding: var(--spacing-m);
+  transition:
+    transform var(--transition-speed),
+    box-shadow var(--transition-speed);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 200px; /* Prevent card from becoming too short */
+}
+
+.scrapbook-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.scrapbook-card:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/**********************************************
+  Image Styling
+**********************************************/
+
+.scrapbook-img {
+  width: 100%;
+  /* Remove "aspect-ratio: 1/1" so the image can be taller if needed 
+     or reapply if you still want square images:
+     aspect-ratio: 1 / 1;
+     object-fit: cover;
+   */
+  border-radius: 4px;
+  margin-bottom: var(--spacing-s);
+  transition: opacity var(--transition-speed);
+}
+
+.scrapbook-img:hover {
+  opacity: 0.95;
+}
+
+/**********************************************
+  Card Text
+**********************************************/
+
+.scrapbook-comment {
+  font-size: 0.95rem; /* Consider making this relative */
+  line-height: 1.3;
+  color: #333333;
+  margin-top: var(--spacing-xs);
+  text-align: center;
+}
+
+/**********************************************
+  Icon
+**********************************************/
+
+.icon {
+  margin-right: 0.25rem;
+  color: inherit;
+}
